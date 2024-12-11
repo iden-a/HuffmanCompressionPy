@@ -1,0 +1,5 @@
+this is a test input file for huffman encoding and decoding
+the huffman algorithm works by creating a binary tree
+with the most frequent characters having shorter codes
+this allows us to achieve compression by replacing characters
+with binary codes of varying lengths
