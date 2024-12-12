@@ -40,6 +40,4 @@ The program calculates and displays the **compression ratio** comparing the size
 3. Run The Program:
    ```bash
    python3 main.py
-   
-
 
