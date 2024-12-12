@@ -3,13 +3,30 @@ from huffman import calculate_frequency, build_huffman_tree, generate_codes, enc
 from utils import read_text_file, write_binary_file, read_binary_file, write_text_file, compression_ratio
 
 def main():
-    # file paths
-    input_path = "data/input.txt"
-    compressed_path = "data/compressed.bin"
-    decompressed_path = "data/decompressed.txt"
+    print("\nWelcome to the HuffmanPy Compression System!")
+    print("\nFollow These Steps For A Smooth Process ... ")
+    print("- Add The Text File You Would Like To Compress Into The `data` Directory")
+    print("- Input and Output Files MUST End in .txt ")
+    print("- Compressed File MUST End in .bin ")
+    print("_____________________________________________________________________________")
 
+    # file paths
+    user_input = input("\nEnter the Text File Name (.txt): ")
+    user_compressed = input("Enter the Compressed File Name (.bin): ")
+    user_decompressed = input("Enter the Decompressed File Name (.txt): ")
+
+    input_path = "data/" + user_input
+    compressed_path = "data/" + user_compressed
+    decompressed_path = "data/" + user_decompressed
+
+    
     # read the input text file
-    text = read_text_file(input_path)
+    try:
+        text = read_text_file(input_path)
+    except FileNotFoundError as error:
+        print("\nMake Sure The File Exists in the `data` Directory")
+        print(error)
+        return
 
     # encode the text
     freq = calculate_frequency(text)
@@ -24,7 +41,7 @@ def main():
     # measure and display compression ratio
     original_size = os.path.getsize(input_path)
     compressed_size = os.path.getsize(compressed_path)
-    print(f"Compression Ratio: {compression_ratio(original_size, compressed_size):.2f}%")
+    print(f"\nCompression Ratio: {compression_ratio(original_size, compressed_size):.2f}%")
 
     # decode the text
     binary_string = read_binary_file(compressed_path)
@@ -33,9 +50,12 @@ def main():
     # write the decompressed text to a file
     write_text_file(decompressed_path, decoded_text)
 
-    # verifying the results to ensure that we have successfully decoded the text
-    print("Decompression complete. Files generated successfully.")
-    print(f"Original text matches decompressed text: {text == decoded_text}")
+    # verifying the results to see if we have successfully decoded the text
+    print("Decompression Complete. Files Generated Successfully.")
+    print(f"Original Text Matches Decompressed Text: {text == decoded_text}")
+
+    print("\nNavigate to the `data` Directory to View The Results.")
+    print("Thanks For Using the HuffmanPy Compression System! ")
 
 if __name__ == "__main__":
     main()
